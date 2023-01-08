@@ -7,6 +7,7 @@ class UsersList extends REST_Controller
     {
         parent::__construct();
         $this->load->model('ApiModel/UsersListModel');
+
     }
     public function index_get()
     {
@@ -15,20 +16,22 @@ class UsersList extends REST_Controller
 
         $token = $head[1];
 
-        $this->response($token, 200);
-        // if ($token == $this->session->userdata('access_token')) {
-        //     $user = new UsersListModel;
-        //     $user_info = $user->get_users_list();
-
-        //     if($user_info){
-        //         $resp = array('user_info' => $user_info,
-        //                         'token'=> $this->session->userdata('access_token'));
-        //         $this->response($user_info, 200);
-        //     }else{
-        //         $this->response(['status' => FALSE, 'message' => 'No User Found.'], REST_Controller::HTTP_NOT_FOUND);
-        //     }
-        // } else {
-        //     $this->response('Unauthorized Access', 401);
-        // }
+        try {
+            $this->load->helper('verifyAuthToken');
+            $verifiedToken = verifyToken($token);
+            if($verifiedToken){
+                $user = new UsersListModel;
+                    $user_info = $user->get_users_list();
+                    $resp = array('user_info' => $user_info);
+                    $this->response($resp, 200);
+            }
+        }
+        catch(Exception $e){
+            $error = array("status"=>401,
+            "message"=>"Invalid Token Provided",
+            "success"=>"false"
+        );
+            $this->response($error);
+        }
     }
 }

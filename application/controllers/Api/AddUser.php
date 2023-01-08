@@ -13,6 +13,7 @@ class AddUser extends REST_Controller
         $data = json_decode(file_get_contents("php://input"),true);
         // echo "<pre>";
         // print_r($data);
+        // exit;
         // echo "</pre>";
         // echo "<pre>"; print_r($_POST);/
         // $user_data = $_POST;

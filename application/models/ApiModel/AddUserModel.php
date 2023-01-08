@@ -6,8 +6,8 @@ class AddUserModel extends CI_Model
     {
         // echo "<pre>"; print_r($user); exit;
         $userData = array(
-            'fname' => $user['fname'],
-            'lname' => $user['lname'],
+            'fname' => $user['fName'],
+            'lname' => $user['lName'],
             'contact' => $user['contact'],
             'employee_role' => $user['empRole'],
             'employee_field' => $user['empField'],
