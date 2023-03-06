@@ -536,6 +536,9 @@ $config['rest_ajax_only'] = FALSE;
 */
 $config['rest_language'] = 'english';
 
+
+
+$config['rest_enable_cors'] = TRUE;
 /*
 |--------------------------------------------------------------------------
 | CORS Check
@@ -591,7 +594,7 @@ $config['allowed_cors_methods'] = [
 | source domain
 |
 */
-$config['allow_any_cors_domain'] = FALSE;
+$config['allow_any_cors_domain'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

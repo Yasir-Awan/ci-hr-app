@@ -13,7 +13,8 @@ class LoginController extends REST_Controller
         $jwt = new JWT();
         $JwtSecretKey = "Mysecretwordshere";
         $userName = $this->post('username');
-        $password = $this->post('password');
+
+        $password = sha1($this->post('password'));
         $loginModel = new LoginModel;
         $user_info = $loginModel->get_detail($userName, $password);
 
@@ -23,7 +24,7 @@ class LoginController extends REST_Controller
                     'user_id' => $user_info[0]['id'],
                     'site' => $user_info[0]['site'],
                     'full_name' => $user_info[0]['fname'] . ' ' . $user_info[0]['lname'],
-                    'username' => $user_info[0]['username'],
+                    'email' => $user_info[0]['email'],
                     'contact' => $user_info[0]['contact'],
                     'role' => $user_info[0]['employee_role'],
                     'status' => $user_info[0]['status'],
